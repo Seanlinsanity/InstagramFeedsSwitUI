@@ -7,17 +7,6 @@
 //
 
 import SwiftUI
-
-struct Post {
-    let id: Int
-    let userName, text, profileImageName, imageName: String
-}
-
-struct Story {
-    let id: Int
-    let imageName: String
-}
-
 struct ContentView: View {
     let posts: [Post] = [
         Post(id: 0, userName: "dogstagram", text: "Hanging out with cute dog in the park😍 \nDo you think I’m cute?🐶 Thumbs up if you think I am cute!💞", profileImageName: "profile", imageName: "postImage"),
@@ -46,7 +35,7 @@ struct ContentView: View {
                         }
                     }.navigationBarTitle(Text("Instagram"), displayMode: .inline)
                         .navigationBarItems(leading: Button(action: {
-                            print("click camera button...")
+                            print("click camera...")
                         }, label: {
                             Image("camera")
                                 .renderingMode(.original)
@@ -54,7 +43,7 @@ struct ContentView: View {
                                 .scaledToFit()
                                 .frame(width: 24, height: 24)
                         }), trailing: Button(action: {
-                            print("click send message button")
+                            print("click send message...")
                         }, label: {
                             Image("send")
                                 .renderingMode(.original)
@@ -65,57 +54,6 @@ struct ContentView: View {
                 }
         }
 
-    }
-}
-
-struct PostView: View {
-    let post: Post
-    let screenWidth: CGFloat
-    var body: some View {
-            VStack(alignment: .leading, spacing: 8) {
-                HStack(spacing: 8) {
-                    Image(post.profileImageName)
-                        .resizable()
-                        .clipShape(Circle())
-                        .frame(width: 50, height: 50)
-                        .clipped()
-                    Text(post.userName).font(.headline)
-                }.padding(EdgeInsets(top: 8, leading: 16, bottom: 0, trailing: 0))
-                Image(post.imageName)
-                    .resizable()
-                    .scaledToFill()
-                    .frame(width: screenWidth, height: 250)
-                    .clipped()
-                Text(post.text)
-                    .lineLimit(nil)
-                    .font(.system(size: 15))
-                    .padding(.leading, 16).padding(.trailing, 16).padding(.bottom, 16)
-            }.listRowInsets(EdgeInsets())
-    }
-}
-
-struct StoryView: View {
-    let stories: [Story]
-    var body: some View {
-        HStack {
-            ForEach(stories, id: \.id) { (story) in
-                ZStack {
-                    Circle()
-                        .fill(Color.init(red: 193/255, green: 53/255, blue: 132/255))
-                        .clipShape(Circle())
-                        .frame(width: 64, height: 64)
-                    Circle()
-                        .fill(Color.white)
-                        .clipShape(Circle())
-                        .frame(width: 60, height: 60)
-                    Image(story.imageName)
-                        .resizable()
-                        .scaledToFill()
-                        .clipShape(Circle())
-                        .frame(width: 56, height: 56)
-                }
-            }
-        }
     }
 }
 
